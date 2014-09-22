@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    /*text-align: center;*/
+}
+#wrapper{
+    width: 600px;
+    margin-left: 20px;
+    /*margin: 0 auto;*/
+}
+canvas{
+    margin-top: 20px;
+    border: 1px solid black;
+}
+canvas:hover{
+    cursor: crosshair;
+}
+form{
+    display: inline-block;
+    text-align: center;
+}
+input{
+    margin-top: 5px;
+    margin-right: 20px;
+    margin-left: 10px;
+}
+
+#lineWidth{
+    max-width: 50px;
+}

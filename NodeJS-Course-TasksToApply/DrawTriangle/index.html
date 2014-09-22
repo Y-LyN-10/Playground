@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Draw Triangle</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div id="wrapper">
+    <canvas id="drawTriangle" width="600" height="400"></canvas>
+    <form class="clear">
+        <input type="button" id="clearBtn" value="Clear"/>
+    </form>
+    <form class="selectLineWidth">
+        Line Width:
+        <input type="number" id="lineWidth" value="1" max="10"/>
+    </form>
+    <form class="selectColor">
+        Stroke Color:
+        <input type="color" id="strokeColor" value="#000000">
+        Fill Color:
+        <input type="color" id="fillColor" value="#000000">
+    </form>
+</div>
+<script src="drawTriangle.js"></script>
+</body>
+</html>
