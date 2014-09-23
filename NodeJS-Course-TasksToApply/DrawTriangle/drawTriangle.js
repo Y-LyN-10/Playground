@@ -3,74 +3,66 @@ function init() {
         colorFillSelector,
         colorStrokeSelector,
         strokeLineWidthSelector,
-        fillColor,
-        strokeColor,
+        defaultColor,
+        fillColor, strokeColor,
         strokeLineWidth,
+        pointsCounter,
         clearBtn;
 
-    // Get fill color
-    colorFillSelector = document.getElementById("fillColor");
-    fillColor = colorFillSelector.value; // init value
+    // Get colors
+    defaultColor  = '#000000';
 
+    colorFillSelector = document.getElementById("fillColor");
     colorFillSelector.addEventListener('change', function () {
         fillColor = colorFillSelector.value;
     });
+    fillColor = colorFillSelector.value || defaultColor;
 
-    // Get stroke color
     colorStrokeSelector = document.getElementById("strokeColor");
-    strokeColor = colorStrokeSelector.value; // init value
-
     colorStrokeSelector.addEventListener('change', function () {
         strokeColor = colorStrokeSelector.value;
     });
+    strokeColor = colorStrokeSelector.value || defaultColor;
 
     // Get stroke line width
     strokeLineWidthSelector = document.getElementById("lineWidth");
-    strokeLineWidth = strokeLineWidthSelector.value; // init value
-
     strokeLineWidthSelector.addEventListener('change', function () {
         strokeLineWidth = strokeLineWidthSelector.value;
     });
+    strokeLineWidth = strokeLineWidthSelector.value || 0;
 
     canvas = document.getElementById("drawTriangle");
     ctx = canvas.getContext("2d");
 
-    var counter = 0;
+    pointsCounter = 0;
     canvas.addEventListener('click', function (event) {
         var x, y;
 
-        x = event.clientX - 20;
+        x = event.clientX - 20; // margins...
         y = event.clientY - 20;
 
-        var init = true;
         draw(x, y);
     });
 
-    ctx.strokeStyle = strokeColor;
-    ctx.lineWidth = strokeLineWidth;
-
     function draw(x, y) {
-        if (counter == 0) {
+        pointsCounter++;
+        if (pointsCounter === 1) {
             ctx.beginPath();
             ctx.moveTo(x, y);
-            counter++;
-        } else if (counter < 2) {
+        } else if (pointsCounter === 2) {
             ctx.lineTo(x, y);
             ctx.strokeStyle = strokeColor;
             ctx.lineWidth = strokeLineWidth;
             ctx.stroke();
-            counter++;
-        } else if (counter === 2) {
+        } else if (pointsCounter === 3) {
             ctx.lineTo(x, y);
             ctx.stroke();
             ctx.closePath();
             ctx.stroke();
             ctx.fillStyle = fillColor;
             ctx.fill();
-            counter = 0;
+            pointsCounter = 0;
         }
-        console.log(x + ' ' + y);
-        console.log(counter);
     }
 
     // Clear canvas
