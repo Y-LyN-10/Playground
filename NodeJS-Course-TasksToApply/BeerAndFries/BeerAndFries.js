@@ -1,9 +1,12 @@
-function beerAndFries(items) {
+exports.beerAndFries = function beerAndFries(items) {
+    'use strict';
+
     var beerScores = [],
         friesScores = [],
-        pairs, i,
         currentScore,
-        maxSum = 0;
+        maxSum = 0,
+        pairs,
+        i;
 
     items.sort(function (a, b) {
         return b.score - a.score;
@@ -24,4 +27,4 @@ function beerAndFries(items) {
     }
 
     return maxSum;
-}
+};
