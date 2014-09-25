@@ -1,17 +1,21 @@
 function init() {
-    var canvas, ctx,
+    'use strict';
+
+    var
+        clearBtn,
+        fillColor,
+        strokeColor,
+        defaultColor,
+        strokeLineWidth,
         colorFillSelector,
         colorStrokeSelector,
         strokeLineWidthSelector,
-        defaultColor,
-        fillColor, strokeColor,
-        strokeLineWidth,
-        pointsCounter,
-        clearBtn;
+        pointsCounter, canvas, ctx;
 
     // Get colors
     defaultColor  = '#000000';
 
+    // Vanilla ice ice baby...
     colorFillSelector = document.getElementById("fillColor");
     colorFillSelector.addEventListener('change', function () {
         fillColor = colorFillSelector.value;
@@ -45,7 +49,7 @@ function init() {
     });
 
     function draw(x, y) {
-        pointsCounter++;
+        pointsCounter += 1;
         if (pointsCounter === 1) {
             ctx.beginPath();
             ctx.moveTo(x, y);
