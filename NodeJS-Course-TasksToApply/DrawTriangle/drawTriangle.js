@@ -133,3 +133,8 @@ function init() {
 }
 
 onload = init;
+
+// TODO: Optimize - Never create elements in loop! This is a DOM HELL - Create them once & use 'cloneNode'
+// TODO: Optimize - And work via parent element, not document
+// TODO: Optimize - createDocumentFragment() - append everything to it and return the whole fragment
+// TODO: Refactoring - separate drawing logic and storage logic
