@@ -13,7 +13,7 @@ function init() {
         pointsCounter, canvas, ctx;
 
     // Get colors
-    defaultColor  = '#000000';
+    defaultColor = '#000000';
 
     // Vanilla ice ice baby...
     colorFillSelector = document.getElementById("fillColor");
@@ -38,12 +38,15 @@ function init() {
     canvas = document.getElementById("drawTriangle");
     ctx = canvas.getContext("2d");
 
+    var galleryBox = document.getElementById('gallery');
+    loadGallery();
+
     pointsCounter = 0;
     canvas.addEventListener('click', function (event) {
-        var x, y;
+        var x, y, margins = 20;
 
-        x = event.clientX - 20; // margins...
-        y = event.clientY - 20;
+        x = event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - margins;
+        y = event.clientY + document.body.scrollTop + document.documentElement.scrollTop - margins;
 
         draw(x, y);
     });
@@ -74,6 +77,59 @@ function init() {
     clearBtn.addEventListener('click', function () {
         ctx.clearRect(0, 0, 600, 400);
     });
+
+    var saveBtn = document.getElementById('saveBtn');
+    saveBtn.addEventListener('click', function () {
+        var fileName = prompt("Enter file name to save your art shedevr: ", "Untitled");
+        if (fileName !== null) {
+            localStorage.setItem(fileName, canvas.toDataURL());
+            addToGallery(fileName);
+        }
+    });
+
+    function loadGallery() {
+        for (var key in localStorage){
+            console.log(key);
+            addToGallery(key);
+        }
+    }
+
+    function addToGallery(key) {
+        var imageBox = document.createElement('div');
+        imageBox.setAttribute('class', 'imageBox');
+
+        var header = document.createElement('span');
+        header.innerHTML = key;
+
+        var img = document.createElement('img');
+        img.src = localStorage.getItem(key);
+
+        var loadBtn = document.createElement('input');
+        loadBtn.type = 'button';
+        loadBtn.value = 'Load';
+        loadBtn.setAttribute('class', 'textBtn');
+        loadBtn.addEventListener('click', function () {
+            ctx.clearRect(0, 0, 600, 400);
+            var img=new Image();
+            img.src=localStorage.getItem(key);
+            ctx.drawImage(img,0,0);
+        });
+
+        var removeBtn = document.createElement('input');
+        removeBtn.type = 'button';
+        removeBtn.value = 'Remove';
+        removeBtn.setAttribute('class', 'textBtn');
+        removeBtn.addEventListener('click', function () {
+            localStorage.removeItem(key);
+            galleryBox.removeChild(imageBox);
+        });
+
+        imageBox.appendChild(header);
+        imageBox.appendChild(img);
+        imageBox.appendChild(loadBtn);
+        imageBox.appendChild(removeBtn);
+        galleryBox.appendChild(imageBox);
+    }
 }
 
 onload = init;
