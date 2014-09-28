@@ -10,15 +10,48 @@ function createCalendar(selector, events) {
     var day = document.createElement('div');
     var week = document.createElement('div');
     var dayTitle = document.createElement('h4');
+    var dayContent = document.createElement('div');
     var dayEvent = document.createElement('span');
 
-    applyDayStyles(day);
-    applyDateTitleStyles(dayTitle);
-    applyDayEventsStyles(dayEvent);
+    applyDayAttributes(day);
+    applyDayTitleAttributes(dayTitle);
+    applyDayEventsAttributes(dayEvent);
 
     var calendar = document.querySelector(selector);
     var month = generateMonth();
     calendar.appendChild(month);
+
+    calendar.addEventListener('click', function (ev) {
+        var selectedDay = ev.target;
+        selectedDay = getParentIfDateTitle(selectedDay);
+        if(selectedDay.classList.contains('calendar-day')){
+            changeDateTimeBackgroundColor(selectedDay, 'white');
+
+            var otherSelected = calendar.getElementsByClassName('selected');
+            for (var i = 0; i < otherSelected.length; i++) {
+                changeDateTimeBackgroundColor(otherSelected[i], 'lightgray');
+                otherSelected[i].classList.remove('selected');
+            }
+
+            selectedDay.classList.add('selected');
+        }
+    });
+
+    calendar.addEventListener('mouseover', function (ev) {
+        var selectedDay = ev.target;
+        selectedDay = getParentIfDateTitle(selectedDay);
+        if(checkIfCalendarDayNotSelected(selectedDay)){
+            changeDateTimeBackgroundColor(selectedDay, 'gray');
+        }
+    });
+
+    calendar.addEventListener('mouseout', function (ev) {
+        var selectedDay = ev.target;
+        selectedDay = getParentIfDateTitle(selectedDay);
+        if(checkIfCalendarDayNotSelected(selectedDay)){
+            changeDateTimeBackgroundColor(selectedDay, 'lightgray');
+        }
+    });
 
     function prepareEvents(events) {
         var result = [];
@@ -75,7 +108,8 @@ function createCalendar(selector, events) {
         return currentDayTitle;
     }
 
-    function applyDayStyles(day) {
+    function applyDayAttributes(day) {
+        day.classList.add('calendar-day');
         day.style.display = 'inline-block';
         day.style.width = '150px';
         day.style.height = '150px';
@@ -83,14 +117,31 @@ function createCalendar(selector, events) {
         day.style.overflowWrap = 'normal';
     }
 
-    function applyDateTitleStyles(dayTitle){
+    function applyDayTitleAttributes(dayTitle){
+        dayTitle.classList.add('calendar-day-title');
         dayTitle.style.backgroundColor = 'lightgray';
         dayTitle.style.textAlign = 'center';
         dayTitle.style.borderBottom = '1px solid black';
         dayTitle.style.margin = '0';
     }
 
-    function applyDayEventsStyles(dayEvent) {
+    function applyDayEventsAttributes(dayEvent) {
         dayEvent.style.float = 'left';
+    }
+
+    function changeDateTimeBackgroundColor(element, color) {
+        element.getElementsByClassName('calendar-day-title')[0].style.backgroundColor = color;
+    }
+
+    function getParentIfDateTitle(element) {
+        if (element.classList.contains('calendar-day-title')){
+            element = element.parentNode;
+        }
+        return element;
+    }
+
+    function checkIfCalendarDayNotSelected(element) {
+        return element.classList.contains('calendar-day') &&
+              !element.classList.contains('selected');
     }
 }
