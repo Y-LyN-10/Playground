@@ -38,7 +38,16 @@ function init() {
     canvas = document.getElementById("drawTriangle");
     ctx = canvas.getContext("2d");
 
+    var imageBox = document.createElement('div');
+    var imageHeader = document.createElement('span');
+    var image = document.createElement('img');
+    var loadButton = document.createElement('input');
+    var removeButton = document.createElement('input');
     var galleryBox = document.getElementById('gallery');
+
+    applyButtonAttributes(loadButton, 'Load');
+    applyButtonAttributes(removeButton, 'Remove');
+
     loadGallery();
 
     pointsCounter = 0;
@@ -80,61 +89,91 @@ function init() {
 
     var saveBtn = document.getElementById('saveBtn');
     saveBtn.addEventListener('click', function () {
-        var fileName = prompt("Enter file name to save your art shedevr: ", "Untitled");
-        if (fileName !== null) {
-            localStorage.setItem(fileName, canvas.toDataURL());
-            addToGallery(fileName);
+        var fileName = prompt('Enter file name to save your art shedevr: ', 'untitled');
+        var confirmedName = false;
+        // TODO: check if image already exists in Local Storage
+        if (fileName !== null && fileName.length > 0) {
+            if (localStorage.getItem(fileName) === null) {
+                addToLocalStorage(fileName);
+                addToGallery(fileName/*, localStorage.length + 1*/ );
+            }
+            if (localStorage.key(fileName) === fileName) {
+                console.log(localStorage.key(fileName));
+                console.log(fileName);
+                confirmedName = confirm('Local storage already contains image with name "' + fileName + '". Replace the previous image?');
+                if (confirmedName) {
+                    removeFromLocalStorage(fileName);
+                    removeFromGallery(fileName);
+
+                    addToLocalStorage(fileName);
+                    addToGallery(fileName);
+                } else {
+                    console.log('image is not saved');
+                }
+            }
         }
     });
 
+    function addToLocalStorage(key) {
+        localStorage.setItem(key, canvas.toDataURL());
+    }
+
+    // Remove from local storage and from gallery
+    function removeImage(key, id) {
+        localStorage.removeItem(key);
+        var imageBoxToRemove = document.getElementById(id);
+        galleryBox.removeChild(imageBoxToRemove);
+    }
+
     function loadGallery() {
-        for (var key in localStorage){
-            console.log(key);
-            addToGallery(key);
+        var index = 0;
+        for (var key in localStorage) {
+            addToGallery(key, index);
+            index += 1;
         }
     }
 
-    function addToGallery(key) {
-        var imageBox = document.createElement('div');
-        imageBox.setAttribute('class', 'imageBox');
+    function addToGallery(key, id) {
+        var currentImageBox = imageBox.cloneNode(true);
+        currentImageBox.classList.add('imageBox');
+        currentImageBox.id = id;
 
-        var header = document.createElement('span');
-        header.innerHTML = key;
+        var currentHeader = imageHeader.cloneNode(true);
+        currentHeader.innerHTML = key + '<br>';
 
-        var img = document.createElement('img');
+        var img = image.cloneNode(true);
         img.src = localStorage.getItem(key);
 
-        var loadBtn = document.createElement('input');
-        loadBtn.type = 'button';
-        loadBtn.value = 'Load';
-        loadBtn.setAttribute('class', 'textBtn');
+        var loadBtn = loadButton.cloneNode(true);
         loadBtn.addEventListener('click', function () {
-            ctx.clearRect(0, 0, 600, 400);
-            var img=new Image();
-            img.src=localStorage.getItem(key);
-            ctx.drawImage(img,0,0);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            var img = new Image();
+            img.src = localStorage.getItem(key);
+            ctx.drawImage(img, 0, 0);
         });
 
-        var removeBtn = document.createElement('input');
-        removeBtn.type = 'button';
-        removeBtn.value = 'Remove';
-        removeBtn.setAttribute('class', 'textBtn');
+        var removeBtn = removeButton.cloneNode(true);
         removeBtn.addEventListener('click', function () {
-            localStorage.removeItem(key);
-            galleryBox.removeChild(imageBox);
+            removeImage(key, currentImageBox.id);
         });
 
-        imageBox.appendChild(header);
-        imageBox.appendChild(img);
-        imageBox.appendChild(loadBtn);
-        imageBox.appendChild(removeBtn);
-        galleryBox.appendChild(imageBox);
+        currentImageBox.appendChild(currentHeader);
+        currentImageBox.appendChild(img);
+        currentImageBox.appendChild(loadBtn);
+        currentImageBox.appendChild(removeBtn);
+        galleryBox.appendChild(currentImageBox);
+    }
+
+    function applyButtonAttributes(textButton, value) {
+        textButton.type = 'button';
+        textButton.classList.add('textBtn');
+        textButton.value = value;
+        return textButton;
     }
 }
 
 onload = init;
 
-// TODO: Optimize - Never create elements in loop! This is a DOM HELL - Create them once & use 'cloneNode'
-// TODO: Optimize - And work via parent element, not document
+// TODO: Optimize - And work via parent element
 // TODO: Optimize - createDocumentFragment() - append everything to it and return the whole fragment
 // TODO: Refactoring - separate drawing logic and storage logic
