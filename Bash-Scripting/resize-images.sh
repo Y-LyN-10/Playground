@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 # Using imagemagick package, this script resizes all images in current folder to desired size
 # By default, script resizes all jpg images to 1024x768 
@@ -37,7 +37,7 @@ function find_package {
 	# Debian / Ubuntu Linux
 	if type "dpkg -l" >/dev/null 2>&1; then
 		if ["dpkg -s $pkg"]; then
-			pkg_available=true #1
+			pkg_available=true
 		fi
 	fi
 	
@@ -56,7 +56,7 @@ function find_package {
 	fi
 	
 	# At least - the "command not found" errors are not visible ^^
-	if $pkg_available == false; then
+	if [[$pkg_available == false]]; then
 		echo "Error - Imagemagick package didn't found."
 		exit;
 	else
