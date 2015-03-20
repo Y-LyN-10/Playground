@@ -4,33 +4,32 @@
 import math
 import re
 regex = re.compile(r"^.*interfaceOpDataFile.*$", re.IGNORECASE)
-
-# if __name__ == "__main__":
-#     main()
     
 def to_list(string):
     elem_list = []
 
-    for i in string_n:
+    for i in string:
        elem_list.append(i)
 
     return elem_list
     
 def getDigits(chars):
+    return [int(ch) for ch in chars if ch.isdigit()]
+
+''' Another solution '''
+
    # digits = []
     
    # for ch in chars:
-   #     if(ch.isdigit()):
+   #     if(ch.isdigit()):e
    #         current_number = int(ch)
    #         digits.append(current_number)
 
    # return digits
 
-   return [int(ch) for ch in chars if ch.isdigit()]
-
 def is_even(n):
     return n % 2 == 0
-   
+
 # --------------------------------------------------------------
 # Task 1 - Factorial
 # --------------------------------------------------------------
@@ -39,6 +38,7 @@ def factorial(n):
     result = math.factorial(n)
     return result
 
+''' Test examples  '''
 # print(factorial(0)) # 1
 # print(factorial(1)) # 1
 # print(factorial(5)) # 120
@@ -57,6 +57,7 @@ def fib_members(n):
         
     return fib_numbers
 
+''' Test examples  '''
 # print(fib_members(1))  # [1]
 # print(fib_members(2))  # [1, 1]
 # print(fib_members(3))  # [1, 1, 2]
@@ -71,7 +72,8 @@ def sum_of_digits(n):
     digits = getDigits(num_as_string)
     
     return sum(digits)
-    
+
+''' Test examples  '''
 # print(sum_of_digits(1325132435356)) # 43
 # print(sum_of_digits(123)) # 6
 # print(sum_of_digits(6))   # 6
@@ -90,6 +92,7 @@ def fact_digits(n):
 
     return sum(result)
 
+''' Test examples  '''
 # print(fact_digits(111)) # 3
 # print(fact_digits(145)) # 145
 # print(fact_digits(999)) # 1088640
@@ -109,6 +112,7 @@ def is_palindrome(s):
     else:
         return is_palindrome(s[1:-1])
 
+''' Test examples  '''
 # print(is_palindrome('121'))   # True
 # print(is_palindrome('kapak')) # True
 # print(is_palindrome('baba'))  # False
@@ -123,6 +127,7 @@ def to_digits(n):
     result = getDigits(str(n))
     return result
 
+''' Test examples  '''
 # print(to_digits(123))    # [1, 2, 3]
 # print(to_digits(99999))  # [9, 9, 9, 9, 9]
 # print(to_digits(123023)) # [1, 2, 3, 0, 2, 3]
@@ -135,6 +140,7 @@ def to_number(digits):
     str_number = "".join(str(d) for d in digits)
     return int(str_number)
 
+''' Test examples  '''
 # print(to_number([1,2,3]))       # 123
 # print(to_number([9,9,9,9,9]))   # 99999
 # print(to_number([1,2,3,0,2,3])) # 123023
@@ -148,6 +154,7 @@ def fib_number(n):
     result = "".join(str(num) for num in numbers)
     return result
 
+''' Test examples  '''
 # print(fib_number(3))  # 112
 # print(fib_number(10)) # 11235813213455
       
@@ -165,6 +172,7 @@ def count_vowels(text):
 
     return counter
 
+''' Test examples  '''
 # print(count_vowels('Python')) # 2
 # print(count_vowels('Theistareykjarbunga')) # 8 (It's a volcano name!)
 # print(count_vowels('grrrrgh!')) # 0
@@ -186,6 +194,7 @@ def count_consonants(text):
 
     return counter
 
+''' Test examples  '''
 # print(count_consonants('Python'))   # 4
 # print(count_consonants('Theistareykjarbunga')) # 11
 # print(count_consonants('grrrrgh!')) # 7
@@ -208,7 +217,8 @@ def char_histogram(string):
             result[ch] = 1
     
     return result
-    
+
+''' Test examples  '''
 # print(char_histogram("Python!"))
 # Expected:  { 'P': 1, 'y': 1, 't': 1, 'h': 1, 'o': 1, 'n': 1, '!': 1 }
 # print(char_histogram("AAAAaaa!!!"))
@@ -226,6 +236,7 @@ def p_score(n):
         
     return 1 + p_score(s)
 
+''' Test examples  '''
 # print(p_score(121)) # 1
 # print(p_score(48))  # 3
 # print(p_score(198)) # 6
@@ -244,6 +255,7 @@ def is_increasing(seq):
     
     return True
 
+''' Test examples  '''
 # print(is_increasing([1,2,3,4,5])) # True
 # print(is_increasing([1]))         # True
 # print(is_increasing([5,6,-10]))   # False
@@ -263,6 +275,7 @@ def is_decreasing(seq):
 
     return True
 
+''' Test examples  '''
 # print(is_decreasing([5,4,3,2,1]))   # True
 # print(is_decreasing([1,2,3]))       # False
 # print(is_decreasing([100, 50, 20])) # True
@@ -286,6 +299,7 @@ def next_hack(n):
 
     return n
 
+''' Test examples  '''
 # print(next_hack(0))    # 1
 # print(next_hack(10))   # 21
 # print(next_hack(8031)) # 8191
