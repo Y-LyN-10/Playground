@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import math
+import re
+regex = re.compile(r"^.*interfaceOpDataFile.*$", re.IGNORECASE)
+
 # -------------------------------------------------------------
 # Task 1 - Count words
 # -------------------------------------------------------------
@@ -20,7 +24,7 @@ print(count_words(words))
 # Task 2 - Unique words
 # -------------------------------------------------------------
 
-def unique_words_count(arr):
+def unique_words_count(words):
     return len(set(words))
 
 # Test examples
@@ -37,7 +41,10 @@ print(unique_words_count(words))
 # -------------------------------------------------------------
 
 def nan_expand(n):
-    pass
+    if (n > 0):
+        return 'Not a ' * n + 'NaN'
+
+    return ''
 
 # Test examples
 '''
@@ -50,8 +57,9 @@ print(nan_expand(3)) # "Not a Not a Not a NaN"
 # Task 4 - Iterations of NaN Expand
 # -------------------------------------------------------------
 
-def iterations_of_nan_expand(string):
-    pass
+def iterations_of_nan_expand(expanded):
+    # Regex for non-overlapping matches only
+    return re.subn('Not a', '', expanded)[1]
 
 # Test examples
 '''
@@ -64,17 +72,38 @@ print(iterations_of_nan_expand('Show these people!')) # False
 # Task 5 - Integer prime factorization
 # -------------------------------------------------------------
 
+def is_prime(number):
+    if number % 2 == 0 or number < 2:
+        return False
+
+    for i in range(3, int(math.sqrt(number)) + 1, 2):
+        if number % i == 0:
+            return False
+
+    return True
+
+from collections import Counter
 def prime_factorization(n):
-    pass
+    if is_prime(n):
+        return [(n, 1)]
+    
+    factors = ([(i, 1) for i in factorize(n)])
+    return factors
+
+def factorize(n):
+    for f in range(2, n//2 + 1):
+        while n % f == 0:
+            n //= f
+            yield f
 
 # Test examples
-'''
+# '''
 print(prime_factorization(10)) # [(2, 1), (5, 1)] # This is 2^1 * 5^1
 print(prime_factorization(14)) # [(2, 1), (7, 1)]
 print(prime_factorization(356))# [(2, 2), (89, 1)]
 print(prime_factorization(89)) # [(89, 1)] # 89 is a prime number
 print(prime_factorization(1000)) # [(2, 3), (5, 3)]
-'''
+# '''
 # -------------------------------------------------------------
 # Task 6 - The group function
 # -------------------------------------------------------------
