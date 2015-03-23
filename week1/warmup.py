@@ -109,8 +109,8 @@ def is_palindrome(s):
         return True
     elif s[:1] != s[-1]:
         return False
-    else:
-        return is_palindrome(s[1:-1])
+
+    return is_palindrome(s[1:-1])
 
 ''' Test examples  '''
 # print(is_palindrome('121'))   # True
@@ -231,8 +231,8 @@ def char_histogram(string):
 def p_score(n):
     if is_palindrome(n):
         return 1
-    else:
-        s = n + int(str(n)[::-1])
+    
+    s = n + int(str(n)[::-1])
         
     return 1 + p_score(s)
 
