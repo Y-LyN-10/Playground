@@ -82,14 +82,13 @@ def is_prime(number):
 
     return True
 
-from collections import Counter
 def prime_factorization(n):
     if is_prime(n):
         return [(n, 1)]
-    
-    factors = ([(i, 1) for i in factorize(n)])
-    return factors
 
+    factors = ([(i, 1) for i in factorize(n)])
+    return list(set([(f[0], factors.count(f)) for f in factors]))
+    
 def factorize(n):
     for f in range(2, n//2 + 1):
         while n % f == 0:
@@ -97,20 +96,34 @@ def factorize(n):
             yield f
 
 # Test examples
-# '''
+'''
 print(prime_factorization(10)) # [(2, 1), (5, 1)] # This is 2^1 * 5^1
 print(prime_factorization(14)) # [(2, 1), (7, 1)]
 print(prime_factorization(356))# [(2, 2), (89, 1)]
 print(prime_factorization(89)) # [(89, 1)] # 89 is a prime number
 print(prime_factorization(1000)) # [(2, 3), (5, 3)]
-# '''
+'''
+
 # -------------------------------------------------------------
 # Task 6 - The group function
 # -------------------------------------------------------------
 
+# yep, super trivial solution
 def group(arr):
-    pass
+    result = []
+    seq = []
+    seq.append(arr[0])
 
+    for i in range(1, len(arr)):
+        if arr[i] != arr[i-1]:
+            result.append(seq)
+            seq = []
+
+        seq.append( arr[i])
+        
+    result.append(seq)
+    return result
+   
 # Test examples
 '''
 print(group([1, 1, 1, 2, 3, 1, 1]) == [[1, 1, 1], [2], [3], [1, 1]])
@@ -122,7 +135,7 @@ print(group([1, 2, 1, 2, 3, 3]) == [[1], [2], [1], [2], [3, 3]])
 # -------------------------------------------------------------
 
 def max_consecutive(items):
-    pass
+    return max([len(g) for g in group(items)])
 
 # Test examples
 '''
@@ -135,7 +148,15 @@ print(max_consecutive([1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 5])) # 3
 # -------------------------------------------------------------
 
 def groupby(func, seq):
-    pass
+    result = {}
+
+    for element in seq:
+        if func(element) in result:
+            result[func(element)].append(element)
+        else:
+            result[func(element)] = [element]
+            
+    return result
 
 # Test examples
 '''
