@@ -170,7 +170,18 @@ print(groupby(lambda x: x % 3, [0, 1, 2, 3, 4, 5, 6, 7])) # {0: [0, 3, 6], 1: [1
 # -------------------------------------------------------------
 
 def prepare_meal(n):
-    pass
+    factors = prime_factorization(n)
+    result = ''
+    result += ''.join(['spam ' * f[1] for f in factors if f[0] == 3])
+    
+    for f in factors:
+        if f[0] == 5:
+            if len(result) == 0:
+                result += 'eggs'
+            else:
+                result += 'and eggs'
+
+    return result
     
 # Test examples
 '''
@@ -206,8 +217,14 @@ print(reduce_file_path('/../')) # '/'
 # Task 11 - Word from a^nb^n
 # -------------------------------------------------------------
 
-def is_an_bn(word):
-    pass
+# Reuse is_palindrome recursive logic
+def is_an_bn(s):
+    if len(s) == 0:
+        return True
+    elif (s[:1] != 'a' and s[-1] != 'b') or len(s) == 1:
+        return False
+    
+    return is_an_bn(s[1:-1])
 
 # Test examples
 '''
