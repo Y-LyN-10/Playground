@@ -38,11 +38,6 @@ def factorial(n):
     result = math.factorial(n)
     return result
 
-''' Test examples  '''
-# print(factorial(0)) # 1
-# print(factorial(1)) # 1
-# print(factorial(5)) # 120
-
 # --------------------------------------------------------------
 # Task 2 - First Nth members of fibonacci
 # --------------------------------------------------------------
