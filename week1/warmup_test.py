@@ -26,7 +26,8 @@ class TestFactorialNumbers(unittest.TestCase):
 #-- 2 --------------------------------------------------------------
 from warmup import fib_members
 
-class TestFibonacciNumist(self):
+class TestFibonacciNumber(unittest.TestCase):
+    def test_fib_members_result_is_list(self):
         fib_members_result = fib_members(1)
         self.assertTrue(isinstance(fib_members_result, list))
 
@@ -150,7 +151,7 @@ class TestCountConsonants(unittest.TestCase):
 
 #-- 11 -------------------------------------------------------------
 
-from warmup import char_historgram
+from warmup import char_histogram
 
 class TestCharHistogram(unittest.TestCase):
     pass
