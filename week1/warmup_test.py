@@ -56,47 +56,65 @@ class TestSumOfDigits(unittest.TestCase):
         sum_of_digits_result = sum_of_digits(123)
         self.assertTrue(isinstance(sum_of_digits_result, int))
 
-    def test_valid_input_should_return_expected_results(self):
+    def test_valid_input_should_return_expected_result(self):
+        self.assertEqual(sum_of_digits(123), 6)
+
+    def test_sum_of_one_number_should_be_that_number(self):
+        self.assertEqual(sum_of_digits(6), 6)
+
+    def test_sum_digits_of_negative_numbers(self):
+        self.assertEqual(sum_of_digits(-10), 1)
+
+    def test_sum_digits_of_huge_number(self):
         self.assertEqual(sum_of_digits(1325132435356), 43)
 
-''' Test examples  '''
-# print(sum_of_digits(1325132435356)) # 43
-# print(sum_of_digits(123)) # 6
-# print(sum_of_digits(6))   # 6
-# print(sum_of_digits(-10)) # 1
+    def test_sum_of_letters_is_zero(self):
+        self.assertEqual(sum_of_digits('blabla'), 0)
+
+    def test_should_filter_digits_when_input_is_alphanumeric(self):
+        self.assertEqual(sum_of_digits('un1v3rs3'), 7)
 
 #-- 4 --------------------------------------------------------------
 from warmup import fact_digits
 
 class TestFactorialDigits(unittest.TestCase):
-    pass
+    def test_sum_of_fatorial_digits_is_integer(self):
+        self.assertTrue(isinstance(fact_digits(111), int))
 
+    def test_valid_input_should_return_expected_result(self):
+        self.assertEqual(fact_digits(999), 1088640)
 
-''' Test examples  '''
-# print(fact_digits(111)) # 3
-# print(fact_digits(145)) # 145
-# print(fact_digits(999)) # 1088640
-
+    def test_should_filter_digits_when_input_is_alphanumeric(self):
+        self.assertEqual(fact_digits('43v3r!'), 36)
+        
 #-- 5 --------------------------------------------------------------
 
 from warmup import is_palindrome
 
 class TestPalindromes(unittest.TestCase):
-    pass
+    def test_number_palindrome(self):
+        self.assertTrue(is_palindrome(121))
 
-''' Test examples  '''
-# print(is_palindrome('121'))   # True
-# print(is_palindrome('kapak')) # True
-# print(is_palindrome('baba'))  # False
-# print(is_palindrome('A dog! A panic in a pagoda!')) # True
-# print(is_palindrome('A man, a plan, a cat, a ham, a yak, a yam, a hat, a canal-Panama!')) # True
+    def test_one_word_palindrome(self):
+        self.assertTrue(is_palindrome('kapak'))
+
+    def test_non_palindrome_word(self):
+        self.assertFalse(is_palindrome('baba'))
+
+    def test_upper_lower_case_word(self):
+        self.assertTrue(is_palindrome('aBbA'))
+
+    def test_sentence_with_empty_spaces_and_symbols(self):
+        palindrome = 'A man, a plan, a cat, a ham, a yak, a yam, a hat, a canal-Panama!'
+        self.assertTrue(is_palindrome(palindrome))
 
 #-- 6 --------------------------------------------------------------
 
 from warmup import to_digits
 
 class TestNumberToDigits(unittest.TestCase):
-    pass
+    def test_to_digits_result_should_be_list(self):
+        self.assertTrue(isinstance(to_digits(123), list))
 
 #-- 7 --------------------------------------------------------------
 
