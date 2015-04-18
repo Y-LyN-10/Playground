@@ -1,0 +1,65 @@
+ES6 Features:
+
+Working with strings:
+- includes(str, index)
+- startsWith(str, index)
+- endsWith(str, index)
+- repeat => str.repeat(int)
+- trim   => str.trim()
+- template strings => `` (in back quotes) - also multiline strings. Interpolation via `Hello ${name}, how are you ${today}?` (! validate your input before that)
+
+- octal and binary literals (0o755, 0b101)
+- Number.isFinite, Number.isNaN
+
+- Array.from(arraylike, mapfun)
+- Destructing => var [m, d, y] = [12, 4, 2014] - it's like unpacking pattern in Python. Same for objects => var today = {m: 12, d:4, y:2014}; var {m: month, d: day} = today; console.log(month, day); // 12 4
+- Shorthand (not HQC, but... ) => {bar: bar} is the same like {bar}
+
+- Block scope (let)
+
+Arrow Function Syntax (C#, Java like lambdas) let square = x => x * x; Great for callbacks, much better than ES5.bind!
+Car.prototype.start = function() {setTimeout(() => this.startDriving(), 1000)};
+
+CLASSES
+- and subclassing (class Dog extends Animal)
+
+MODULES
+Simple Modules => let baz = 'baz; //baz.js
+export baz; import {baz} from "baz.js";
+import spawn from "http://sdgsj/hg.js"
+
+- Mixing and Matching
+- Default parameters
+- Spread
+- Loops! for-of :)
+
+GENERATORS
+- No default iterators, use generators!
+- function* items() {}
+
+PROMISES
+
+Data structures
+- Set
+- double underscore - wtf - in ES6 like in Python?!
+
+Proxying __noSuchMethod__
+
+Official ES6 goals: a better language for applications, libraries, code generators
+
+======================================
+ES7 - comin in 4-5 years
+--------------------------------------
+JS to become a VM language like bytecode.
+
+JavaScript as functional language
+for loops
+
+Generators in programming
+
+============================
+
+
+
+
+

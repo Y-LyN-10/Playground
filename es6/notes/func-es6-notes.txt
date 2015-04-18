@@ -1,0 +1,41 @@
+Arrow functions:
+
+let sum = 0;
+numbers.forEach(n => sum += n);
+
+// Pure functional :))))
+expect(square(add(2, three()))).toBe(25);
+
+Arrow functions always capture the 'this' value of the context they are inside.
+
+Iterators:
+
+let iterator = numbers.values(); // returna an iterator object
+let next = iterator.next(); // {value: 1, done: false}
+while(!next.done){
+	sum += next.value;
+	next = iterator.next();
+}
+
+For of - iterate over values, not keys inside of object :)
+looks just the same like for in, but with 'of' keyword
+
+for(let i in person){
+    console.log(person[i]);
+}
+
+for(let i of numbers){
+    console.log(i);
+}
+
+Comprehensions
+
+// Array
+var numbers = [for (n of [1, 2, 3]) n * n];
+var numbers = [for (n of [1, 2, 3]) if(n > 1) n * n];
+
+// Generator
+var numbers = (for (n of [1, 2, 3]) n * n);
+
+
+
