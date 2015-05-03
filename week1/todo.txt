@@ -1,0 +1,28 @@
+TODO
+----------------------
+======  Week 1  ======
+----------------------
+2.The Real Deal
+  - 7. Counting substrings
+  - 10. Matrix Bombing
+  
+3. The final round:
+  - 10. Reduce file path
+  - 12. Credit card validation
+  - 13. Goldbach Conjecture
+  - 14. Magic Square
+  - 15. Friday Years
+  
+----------------------
+======  Week 2  ======
+----------------------
+2. File system problems
+3. Cash Desk
+4. Fractions
+
+----------------------
+======  Week 3  ======
+----------------------
+1. Bank Account
+2. Retrospective
+

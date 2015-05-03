@@ -242,13 +242,30 @@ print(is_an_bn("aaaaabbbbb")) # True
 # -------------------------------------------------------------
 
 def is_credit_card_valid(number):
-    pass
+    str_d = str(number)
+    number_length = len(str_d)
+    transformed = str(number)
+
+    print(transformed)
+    
+    if number_length % 2 == 0:
+        return False
+
+    for i in range(1, number_length, 2):
+        str.replace(transformed, str(int(str_d[i]*2)))
+
+
+    print(transformed)
+    
+
+    return True
 
 # Test examples
-'''
+#'''
 print(is_credit_card_valid(79927398713)) # True
 print(is_credit_card_valid(79927398715)) # True
-'''
+print(is_credit_card_valid(7992739871))  # False
+#'''
 
 # -------------------------------------------------------------
 # Task 13 - Goldbach Conjecture

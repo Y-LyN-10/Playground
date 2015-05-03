@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import copy
+import pprint
+
 def get_digits(chars):
     return [int(ch) for ch in chars if ch.isdigit()]
 
@@ -12,7 +15,6 @@ def get_divisors(n):
     return [x for x in range(1, n+1) if n % x == 0]
 
 ''' Another solution: '''
-
    # number = n
    # divisors = []
     
@@ -30,6 +32,7 @@ def sum_of_divisors(n):
 ''' Test examples: '''
 # print(sum_of_divisors(8))    # 15
 # print(sum_of_divisors(7))    # 8
+
 # print(sum_of_divisors(1))    # 1
 # print(sum_of_divisors(1000)) # 2340
 
@@ -186,7 +189,82 @@ def sum_matrix(m):
 # Task 10 - Matrix Bombing
 # --------------------------------------------------------------
 
+def dec(value, positions, linear_m):
+    return sum([(linear_m[p] - value) if linear_m[p] > value else 0 for p in positions])
+
+def drop_bomb(l, p):
+    m_size = 3;
+    target_value = l[p]
+    bombPositions = []
+
+    # upper left corner 
+    if p == 0: 
+        bombPositions.append(p + m_size)
+        bombPositions.append(p + 1)
+        bombPositions.append(p + m_size + 1)
+        
+    # bottom right corner
+    elif p == len(l):
+        bombPositions.append(p - m_size)
+        bombPositions.append(p - 1)
+        bombPositions.append(p - 1 + m_size)
+        
+    else:
+        
+        if p < len(l) / m_size: # upper row 
+            bombPositions.append(p + m_size)
+            
+        if p % m_size != 0: # if not fist col
+            bombPositions.append(p - 1)
+            bombPositions.append(p + m_size - 1)
+        if p - 1 % m_size != 0: # if not last col
+            bombPositions.append(p + 1)
+            bombPositions.append(p + m_size + 1)
+            
+        elif p > len(l) - len(l) - m_size: # bottom row
+            bombPositions.append(p - m_size)
+
+            if p % m_size != 0: # if not fist col
+                bombPositions.append(p - 1)
+                bombPositions.append(p - m_size - 1)
+                if p + 1 % m_size != 0: # if not last col
+                    bombPositions.append(p + 1)
+                    bombPositions.append(p - m_size + 1)
+    
+        else:
+            bombPositions.append(p + m_size)
+            bombPositions.append(p - m_size)
+
+            if p % m_size != 0: # if not first col
+                bombPositions.append(p - 1)
+                bombPositions.append(p + m_size - 1),
+                bombPositions.append(p - m_size - 1)
+            if p - 1 % m_size != 0: # if not last col
+                bombPositions.append(p + 1)
+                bombPositions.append(p + m_size + 1)
+                bombPositions.append(p - m_size + 1)
+    
+    bombed = dec(target_value, bombPositions, l)
+    
+    return bombed
+    
+
 def matrix_bombing_plan(m):
-    return 'Boom!'
+    bombing_plan = {}
 
+    linear_m = [n for i in m if len(i) > 2 for n in i]
 
+    for i in range(len(linear_m)):
+        bombed = drop_bomb(copy.deepcopy(linear_m), i)
+        bombing_plan[(i, 'x')] = bombed
+
+    return bombing_plan
+
+result = matrix_bombing_plan([
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+])
+
+pp = pprint.PrettyPrinter()
+pp.pprint(result)
