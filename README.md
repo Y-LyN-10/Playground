@@ -7,8 +7,6 @@ Missing module blah blah. And who knows how many times?
 
 Have you ever faced that problem? Here is a simple script to automate that. 
 
-Currently it works only with gulp command. (eg. you execute 'gulp' and it says 'Error: Cannot find module ...)
-
 #### How to use this script?
 No npm package created yet, so...
 
@@ -33,4 +31,10 @@ $ npm link
 
 #### Done! :)
 
-Now you can use the 'nai' command to run it wherever you are.
+Now you can use the 'nai' command to run it wherever you are. Add as argument your command or script name, that should be executed. (eg. you execute 'gulp' and it says 'Error: Cannot find module ... or npm start)
+
+```bash
+$ nai npm start
+```
+
+If there is no output, then... you simply don't need this anymore, because your script is running fine.
