@@ -33,15 +33,15 @@ $ npm link
 
 Now you can use the 'nai' command to run it wherever you are. And also, add the command, that insolently crashes, because you have some missing module(s) 
 
-(eg. you execute 'gulp' and it says 'Error: Cannot find module ... then do)
+(eg. you execute 'gulp' and it says 'Error: Cannot find module ... )
 
 ```bash
 $ nai gulp
 ```
 
 If there is no output, then... you simply don't need this anymore, because your script is running fine.
-
-Tested only with 'gulp' and 'npm start' for now. 
-If you have nothing else to do, you're welcome to contribute :3
-
-Any feedback is welcome. Thanks!
+<p>
+Tested only with 'gulp' and 'npm start' for now. <br>
+<p>
+Any feedback or/and contribution is welcome. <br>
+**Thanks!**
