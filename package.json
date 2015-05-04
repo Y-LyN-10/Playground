@@ -1,0 +1,9 @@
+{
+    "name": "missing-modules-installer",
+    "version": "0.0.1",
+    "description": "Installs all missing modules while the program runs correctly",
+    "preferGlobal": "true",
+    "bin": { "nai": "auto-install-modules.js" },
+    "author": "Y-LyN-10",
+    "engines": { "node": "*" }
+}
