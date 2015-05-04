@@ -1,45 +1,45 @@
 #! /usr/bin/env node
 
 var exec = require('child_process').exec,
-    command = 'gulp',
-    regExp = /\'([^']+)\'/,
-    child;
+    args = process.argv.slice(2),
+    command = args.join(' '), child,
+    regExp = /(?:^|\s)Cannot find module (.*?)(?:\s|$)/;
 
 if (!command) {
-    console.log('Argument expected');
-    process.exit();
+    console.log('Argument expected - command or script name');
+    process.exit(9);
 }
 
 executeCommand(command);
 
 function executeCommand(command){
-
     child = exec(command, function (error, stdout, stderr) {
         if(error){
-            var missingModule = regExp.exec(error)[0].replace(/\'/g,'');
-            var installCommand = 'npm i ' + missingModule + ' --save';
+            var match = regExp.exec(error);
 
-            console.log('Missing module:', missingModule);
-            console.log('Install...');
+            if (match) {
+                var missingModule = match[1].replace(/^\s*[\r\n]/gm, '').replace(/\'/g, '');
+                var installCommand = 'npm install ' + missingModule + ' --save';
 
-            exec(installCommand, function (error, stdout, stderr) {
-                if(error) {
-                    console.log(error);
-                    process.exit(1);
-                }
+                console.log('Missing module:', missingModule);
+                console.log('Install...');
 
-                console.log(stdout);
+                exec(installCommand, function (error, stdout, stderr) {
+                    if (error) {
+                        console.log(error);
+                        process.exit(1);
+                    }
+
+                    console.log(stdout);
+                    console.log(stderr);
+
+                    executeCommand(command);
+                });
+            } else {
+                // No missing modules found, but there is another error
                 console.log(stderr);
-
-                console.log('Done.');
-                executeCommand(command);
-            });
+                process.exit(1);
+            }
         }
     });
-
-    child.stdout.on('data', function(data) {
-        console.log('Finished');
-        process.exit();
-    });
 }
-
