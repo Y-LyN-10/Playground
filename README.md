@@ -1,7 +1,7 @@
 ### Auto-install all missing node modules, required for running some program
 
 Well, guess you have to run some node project...
-You clone the repo, do 'npm install' as usually, run everything described for that project and... boom. 
+You clone the repo, do 'npm install' as usual, run everything described for that project and... boom. 
 Missing module, blah blah... you install it manually. Then run the program again and... boom. 
 Missing module blah blah. And who knows how many times? 
 
