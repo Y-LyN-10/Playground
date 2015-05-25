@@ -1,0 +1,13 @@
+{
+  "logging": false,
+  "username": "postgres",
+  "password": "1234",
+  "host": "127.0.0.1",
+  "dialect": "postgres",
+  "pool": {
+    "max": 10,
+    "min": 3,
+    "idle": 60000
+  },
+  "database": "example"
+}
