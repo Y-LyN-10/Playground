@@ -31,9 +31,7 @@ int main(){
   int end;
   cin >> end;
   validate(&end);
-
-  int perfectNumber;
-
+  
   // swap the numbers if needed
   if(start > end){
     int tmp = start;
