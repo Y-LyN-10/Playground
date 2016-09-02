@@ -1,0 +1,17 @@
+{
+  "name": "remote-player",
+  "version": "0.0.1",
+  "description": "I want to control my computer's audio player via my kindle (browser)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Y-LyN-10",
+  "license": "MIT",
+  "dependencies": {
+    "hapi": "^15.0.3",
+    "jade": "^1.11.0",
+    "player": "^0.6.1",
+    "vision": "^4.1.0"
+  }
+}
