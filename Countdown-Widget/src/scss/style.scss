@@ -1,0 +1,46 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+@import 'base/base';
+
+@import 'includes/nav';
+@import 'includes/footer';
+
+html, body {
+  width: 100%;
+  height: 80%;
+}
+
+body {
+  -webkit-app-region: drag;
+  color: white;
+}
+
+.list-group-item {
+  background-color: #464646;
+  //background-color: rgba(0,0,0,0.3);
+  color: black;
+  //height: 90px;
+}
+
+.too-soon{
+  color: red;
+}
+
+.soon {
+  color: orangered;
+}
+
+.keep-calm {
+  color: yellow;
+}
+
+.sleep-well{
+  color: #00c700;
+}
+
+.party-hard {
+  color: deeppink;
+}

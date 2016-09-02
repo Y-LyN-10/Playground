@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <title>Countdown</title>
+    <link rel="stylesheet" href="../dist/vendor/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../dist/vendor/bootstrap/dist/css/bootstrap-theme.css"/>
+    <link rel="stylesheet" href="../dist/vendor/angular-bootstrap/ui-bootstrap-csp.css"/>
+
+    <script src="../dist/vendor/jquery/dist/jquery.js"></script>
+
+      <!-- bower:css -->
+      <link rel="stylesheet" href="../dist/vendor/skeleton/css/skeleton.css" />
+      <!-- endbower -->
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="../dist/css/style.css">
+  </head>
+  <body ng-controller="MainController as vm" style="background-color: #464646">
+    <ul class="list-group-item">
+      <li class="list-group-item list-unstyled"
+          ng-repeat="e in vm.events | orderBy: 'date'"
+          ng-hide="{{e.date | until }} >= 60">
+          <div class="panel-title">
+            <strong ng-class="{{e.date | until}} < 15 ? 'too-soon' :
+            {{e.date | until}} > 14 && {{e.date | until}} < 22 ? 'soon' :
+            {{e.date | until}} > 21 && {{e.date | until}} < 36 ? 'keep-calm' : 'sleep-well'">
+                {{e.date | until}} days until
+            </strong>
+          </div>
+          <div>{{e.subject}} {{e.type}}</div>
+      </li>
+    </ul>
+
+    <!-- REQUIRED -->
+    <script src="../jspm_packages/system.js"></script>
+    <script src="../config.js"></script>
+    <!-- bower:js -->
+    <script src="../dist/vendor/angular/angular.js"></script>
+    <script src="../dist/vendor/angular-mocks/angular-mocks.js"></script>
+    <script src="../dist/vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="../dist/vendor/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../dist/vendor/moment/moment.js"></script>
+    <!-- endbower -->
+    <script src="../dist/app/home/home.js"></script>
+  </body>
+</html>
