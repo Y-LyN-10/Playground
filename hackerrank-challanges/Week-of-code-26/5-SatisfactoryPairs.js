@@ -77,7 +77,7 @@ function processData(input) {
     // 13 test cases fail with timeout
 } 
 
-// TODO: try node.js hack to execute in parallel
+// Ignore below this line
 process.stdin.resume();
 process.stdin.setEncoding("ascii");
 _input = "";
