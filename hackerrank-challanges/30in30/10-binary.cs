@@ -9,15 +9,18 @@ public class Solution
 
         for (int i = 0; i < binaryString.Length; i++)
         {	
-            if(binaryString[i] == '1'){
+            if(binaryString[i] == '1')
+            {
                 counter++;
             } 
 
-            if(counter > maxCount) {
+            if(counter > maxCount) 
+            {
                 maxCount = counter;
             }
 
-            if(binaryString[i] == '0') {
+            if(binaryString[i] == '0') 
+            {
                 counter = 0;
             }
         }
