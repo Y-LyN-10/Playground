@@ -20,7 +20,8 @@ class BankAccount:
     # TODO: That is not working
     @property
     def name(self):
-        return self.name;
+        #DG 19.102017 - maybe this should work
+        return self.__name;
 
     @name.setter
     def name(self, name):
