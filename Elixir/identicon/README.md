@@ -1,6 +1,6 @@
 # Identicon
 
-**TODO: Add description**
+To make `:egd` module working, you may have to run `mix local.rebar --force` before `mix deps.get` command. 
 
 ## Installation
 
