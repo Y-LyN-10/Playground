@@ -1,10 +1,9 @@
-<h1>Listing Topics</h1>
+<h4>Topics</h4>
 
 <table>
   <thead>
     <tr>
-      <th>Title</th>
-
+      <th></th>
       <th></th>
     </tr>
   </thead>
@@ -23,4 +22,8 @@
   </tbody>
 </table>
 
-<span><%= link "New Topic", to: Routes.topic_path(@conn, :new) %></span>
+<div class="fixed-action-btn">
+  <%= link to: Routes.topic_path(@conn, :new), class: "btn-floating btn-dash-large waves-effect waves-light red" do %>
+    <i class="material-icons">add</i>
+  <% end %>
+</div>

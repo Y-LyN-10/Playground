@@ -1,4 +1,4 @@
-<h1>Edit Topic</h1>
+<h4>Edit Topic</h4>
 
 <%= render "form.html", Map.put(assigns, :action, Routes.topic_path(@conn, :update, @topic)) %>
 
