@@ -2,7 +2,7 @@ defmodule DiscussWeb.Router do
   use DiscussWeb, :router
 
   pipeline :browser do
-    plug :accepts, ["html"]
+    plug :accepts, ["html", "json"]
     plug :fetch_session
     plug :fetch_flash
     plug :protect_from_forgery
@@ -16,11 +16,10 @@ defmodule DiscussWeb.Router do
   scope "/", DiscussWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    get "/", TopicController, :index
     get "/topics/new", TopicController, :new
     get "/topics/:id/edit", TopicController, :edit
 
-    get "/topics", TopicController, :index
     post "/topics", TopicController, :create
     get "/topics/:id", TopicController, :show
     put "/topics/:id", TopicController, :update

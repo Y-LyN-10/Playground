@@ -4,6 +4,8 @@ defmodule DiscussWeb.TopicController do
   alias Discuss.DiscussTopic
   alias Discuss.DiscussTopic.Topic
 
+  action_fallback DiscussWeb.FallbackController
+
   def index(conn, _params) do
     topics = DiscussTopic.list_topics()
     render(conn, "index.html", topics: topics)
@@ -32,9 +34,16 @@ defmodule DiscussWeb.TopicController do
   end
 
   def edit(conn, %{"id" => id}) do
-    topic = DiscussTopic.get_topic!(id)
-    changeset = DiscussTopic.change_topic(topic)
-    render(conn, "edit.html", topic: topic, changeset: changeset)
+    case DiscussTopic.get_topic!(id) do
+      nil ->
+        conn
+        |> put_status(:not_found)
+        |> put_view(DiscussWeb.ErrorView)
+        |> render(:"404")
+      topic ->
+        changeset = DiscussTopic.change_topic(topic)
+        render(conn, "edit.html", topic: topic, changeset: changeset)
+      end
   end
 
   def update(conn, %{"id" => id, "topic" => topic_params}) do
