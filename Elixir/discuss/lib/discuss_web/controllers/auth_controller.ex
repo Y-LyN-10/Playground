@@ -7,8 +7,6 @@ defmodule DiscussWeb.AuthController do
   plug Ueberauth
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, params) do
-    IO.inspect(auth)
-
     user_attrs = %{
       token: auth.credentials.token,
       email: auth.info.email,
