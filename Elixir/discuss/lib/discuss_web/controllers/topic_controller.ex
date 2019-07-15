@@ -4,6 +4,8 @@ defmodule DiscussWeb.TopicController do
   alias Discuss.DiscussTopic
   alias Discuss.DiscussTopic.Topic
 
+  plug DiscussWeb.Plugs.RequireAuth when action in [:new, :create, :edit, :update, :delete]
+
   action_fallback DiscussWeb.FallbackController
 
   def index(conn, _params) do

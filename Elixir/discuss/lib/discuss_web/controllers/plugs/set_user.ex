@@ -5,8 +5,8 @@ defmodule DiscussWeb.Plugs.SetUser do
   alias Discuss.Repo
   alias Discuss.DiscussTopic.User
 
+   # This function is required for plugs
   def init(_params) do
-
   end
 
   def call(conn, _params) do
