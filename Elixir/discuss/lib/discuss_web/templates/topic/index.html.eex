@@ -10,12 +10,12 @@
   <tbody>
 <%= for topic <- @topics do %>
     <tr>
-      <td><%= topic.title %></td>
-
-      <td>
-        <%= link "Show", to: Routes.topic_path(@conn, :show, topic) %>
+      <td><%= link topic.title, to: Routes.topic_path(@conn, :show, topic) %></td>
+      <td class="right">
+        <%= if @conn.assigns.user.id == topic.user_id do %>
         <%= link "Edit", to: Routes.topic_path(@conn, :edit, topic) %>
         <%= link "Delete", to: Routes.topic_path(@conn, :delete, topic), method: :delete, data: [confirm: "Are you sure?"] %>
+        <% end %>
       </td>
     </tr>
 <% end %>
