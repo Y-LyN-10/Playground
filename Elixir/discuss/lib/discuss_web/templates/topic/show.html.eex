@@ -7,5 +7,7 @@
 
 </ul>
 
-<span><%= link "Edit", to: Routes.topic_path(@conn, :edit, @topic) %></span>
+<%= if @conn.assigns.user.id == @topic.user_id do %>
+  <span><%= link "Edit", to: Routes.topic_path(@conn, :edit, @topic) %></span>
+<% end %>
 <span><%= link "Back", to: Routes.topic_path(@conn, :index) %></span>
