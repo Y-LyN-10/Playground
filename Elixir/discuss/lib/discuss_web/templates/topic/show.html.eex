@@ -8,6 +8,13 @@
 <% end %>
 <span><%= link "Back", to: Routes.topic_path(@conn, :index) %></span>
 
-<div>
-  <button>Ping!</button>
+<div class="input-field">
+  <textarea class="materialize-textarea"></textarea>
+  <button class="btn">Add Comment</button>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    window.createSocket(<%= @topic.id %>)
+  });
+</script>
