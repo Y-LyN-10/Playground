@@ -6,12 +6,18 @@
 <%= if @conn.assigns.user.id == @topic.user_id do %>
   <span><%= link "Edit", to: Routes.topic_path(@conn, :edit, @topic) %></span>
 <% end %>
-<span><%= link "Back", to: Routes.topic_path(@conn, :index) %></span>
 
-<div class="input-field">
-  <textarea class="materialize-textarea"></textarea>
-  <button class="btn">Add Comment</button>
+<hr/>
+<div>
+    <span>Comments</span>
+    <ul class="comments-collection collection"></ul>
+    <div class="input-field">
+      <textarea class="materialize-textarea"></textarea>
+      <button class="btn">Add Comment</button>
+    </div>
 </div>
+
+<span><%= link "Back", to: Routes.topic_path(@conn, :index) %></span>
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
