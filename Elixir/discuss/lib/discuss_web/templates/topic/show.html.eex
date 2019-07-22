@@ -3,7 +3,7 @@
   <%= @topic.title %>
 </li></ul></div>
 
-<%= if @conn.assigns.user.id == @topic.user_id do %>
+<%= if @conn.assigns.user && (@conn.assigns.user.id == @topic.user_id) do %>
   <span><%= link "Edit", to: Routes.topic_path(@conn, :edit, @topic) %></span>
 <% end %>
 
