@@ -7,7 +7,7 @@ defmodule Discuss.DiscussTopic.Topic do
 
     belongs_to :user, Discuss.DiscussTopic.User
 
-    has_many :comments, Discuss.DiscussTopic.Comment
+    has_many :comments, Discuss.DiscussTopic.Comment, on_delete: :delete_all
 
     timestamps()
   end

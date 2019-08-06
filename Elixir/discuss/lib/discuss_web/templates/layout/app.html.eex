@@ -12,7 +12,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
 
     <script>
-        window.userToken = "<%= Phoenix.Token.sign(DiscussWeb.Endpoint, "key", @conn.assigns.user.id) %>";
+      window.userToken = "<%=
+        if (@conn.assigns.user) do
+          Phoenix.Token.sign(DiscussWeb.Endpoint, "key", @conn.assigns.user.id)
+        end
+      %>";
     </script>
   </head>
   <body>
