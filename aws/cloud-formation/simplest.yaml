@@ -1,0 +1,10 @@
+Resources:
+  Ec2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t3.micro
+      ImageId: ami-0f2176987ee50226e
+      Tags:
+        - Key: "Name"
+          Value: "Linux AMI"
+          
