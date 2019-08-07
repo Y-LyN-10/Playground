@@ -2,6 +2,9 @@ Parameters:
   KeyName:
     Description: Name of the existing EC2 KeyPair to enable ssh access into the server
     Type: AWS::EC2::KeyPair::KeyName
+  MyIp:
+    Description: "IP address to be added in the security group for access"
+    Type: String
 Mappings:
   RegionMap:
     us-west-2:
@@ -35,11 +38,10 @@ Resources:
         - IpProtocol: tcp
           FromPort: 22
           ToPort: 22
-          CidrIp: 0.0.0.0/0
+          CidrIp: !Ref MyIp
 Outputs:
   ServerDNS:
     Value: !GetAtt
       - Ec2Instance
       - PublicDnsName
-          
 
