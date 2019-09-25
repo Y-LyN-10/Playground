@@ -14,6 +14,12 @@ Resources:
     Type: AWS::EC2::Instance
     Properties:
       InstanceType: t2.nano
+      UserData:
+        !Base64 |
+          #!/bin/bash
+          yum update -y
+          yum install httpd -y
+          service httpd start
       ImageId:
         Fn::FindInMap:
         - RegionMap
@@ -47,4 +53,3 @@ Outputs:
     Value: !GetAtt
       - Ec2Instance
       - PublicDnsName
-
